@@ -13,7 +13,7 @@ R-packages required are data.table and xgboost.
 Before applying the code, first separate your GWAS data in three disjoint data sets:
 The ranking data, the fitting data and the evaluation data.
 
-### Ranking process
+### Ranking phase
 In the ranking process we apply the ranking data, of size N, for ranking the features by importance, and thereby removing noise in the later process.
 We create A randomly chosen subsets consisting of G <= N individuals and S SNPs with small mutual correlation. This can be done by running
 the batch script **MakeCrossValdsIndepSNPs.sh** in the XGBoostAndTreeSHAP folder, with each line producing one subset. Add or remove lines for your chosen
@@ -39,4 +39,7 @@ the R-function **RunXGBoostObesityWithCovariates.R**. This R-function requires t
 r_env. In **RunXGBoostObesityWithCovariates.R**, include the environmental covariates to use in CovData. The hyperparameters of the constructed xgboost-models is set here as an argument
 in the function **XGBoostOnSNPdata_cv**.
 Create a directory consisting of all the constructed xgboost-models, and save them in the form "XGB_UnifWholeGenomeWithCovsIndepSNPsSubset**shID**Testdata**WhichIsTestdata**.RData",
-where **WhichIsTestdata** indicates which folder that is not used during the construction of the model in the cross-validation. 
+where **WhichIsTestdata** indicates which folder that is not used during the construction of the model in the cross-validation.
+For each model, compute the SHAP value for each feature for each individual in the corresponding test data, and compute the expected relative feature contribution (ERFC) for each feature based on all p models. See published paper for more details. 
+
+### Model fiting phase
