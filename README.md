@@ -42,4 +42,3 @@ Create a directory consisting of all the constructed xgboost-models, and save th
 where **WhichIsTestdata** indicates which folder that is not used during the construction of the model in the cross-validation.
 For each model, compute the SHAP value for each feature for each individual in the corresponding test data, and compute the expected relative feature contribution (ERFC) for each feature based on all p models. See published paper for more details. 
 
-### Model fiting phase
